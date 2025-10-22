@@ -1,0 +1,16 @@
+{
+  "name": "keyvault-mcp-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for KeyVault Pro - enables AI agents to securely access API keys",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["mcp", "api-keys", "ai", "security", "vault"],
+  "author": "KeyVault Pro",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

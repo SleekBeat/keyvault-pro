@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyVault Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Unlock Screen -->
+  <div id="unlock-screen" class="screen">
+    <div class="header">
+      <h1>🔐 KeyVault Pro</h1>
+      <p class="subtitle">Secure API Key Manager</p>
+    </div>
+    
+    <div class="unlock-form">
+      <div class="input-group">
+        <label for="master-password">Master Password</label>
+        <input type="password" id="master-password" placeholder="Enter your master password" autocomplete="off">
+      </div>
+      
+      <button id="unlock-btn" class="btn btn-primary">Unlock Vault</button>
+      
+      <div id="unlock-error" class="error-message" style="display: none;"></div>
+      
+      <div class="help-text">
+        <p>First time? Enter a new master password to create your vault.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Screen -->
+  <div id="main-screen" class="screen" style="display: none;">
+    <div class="header">
+      <h1>🔑 KeyVault Pro</h1>
+      <div class="header-actions">
+        <button id="lock-btn" class="btn-icon" title="Lock Vault">🔒</button>
+        <button id="settings-btn" class="btn-icon" title="Settings">⚙️</button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search keys...">
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="favorites">Favorites</button>
+      <button class="filter-tab" data-filter="recent">Recent</button>
+    </div>
+
+    <!-- Keys List -->
+    <div id="keys-list" class="keys-list">
+      <!-- Keys will be dynamically inserted here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state" style="display: none;">
+      <p>No API keys yet</p>
+      <button id="add-first-key-btn" class="btn btn-secondary">Add Your First Key</button>
+    </div>
+
+    <!-- Add Key Button -->
+    <div class="footer">
+      <button id="add-key-btn" class="btn btn-primary btn-block">+ Add New Key</button>
+    </div>
+  </div>
+
+  <!-- Add/Edit Key Screen -->
+  <div id="key-form-screen" class="screen" style="display: none;">
+    <div class="header">
+      <button id="back-btn" class="btn-icon">←</button>
+      <h2 id="form-title">Add New Key</h2>
+    </div>
+
+    <form id="key-form" class="key-form">
+      <div class="input-group">
+        <label for="service-name">Service Name *</label>
+        <input type="text" id="service-name" placeholder="e.g., OpenAI, Stripe, AWS" required>
+      </div>
+
+      <div class="input-group">
+        <label for="api-key-value">API Key *</label>
+        <div class="key-input-wrapper">
+          <input type="password" id="api-key-value" placeholder="Enter your API key" required>
+          <button type="button" id="toggle-key-visibility" class="btn-icon-small">👁️</button>
+          <button type="button" id="generate-key-btn" class="btn-icon-small" title="Generate Random Key">🎲</button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="environment">Environment</label>
+        <select id="environment">
+          <option value="production">Production</option>
+          <option value="development">Development</option>
+          <option value="staging">Staging</option>
+          <option value="testing">Testing</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="tags">Tags (comma separated)</label>
+        <input type="text" id="tags" placeholder="e.g., ai, payment, cloud">
+      </div>
+
+      <div class="input-group">
+        <label for="domains">Allowed Domains (comma separated)</label>
+        <input type="text" id="domains" placeholder="e.g., app.example.com, api.example.com">
+      </div>
+
+      <div class="input-group">
+        <label for="rate-limit">Rate Limit</label>
+        <input type="text" id="rate-limit" placeholder="e.g., 60 req/min, 1000 req/day">
+      </div>
+
+      <div class="input-group">
+        <label for="expires-at">Expiration Date</label>
+        <input type="date" id="expires-at">
+      </div>
+
+      <div class="input-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" rows="3" placeholder="Add any notes or documentation links"></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="favorite">
+          <span>Mark as favorite</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="cancel-form-btn" class="btn btn-secondary">Cancel</button>
+        <button type="submit" id="save-key-btn" class="btn btn-primary">Save Key</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Settings Screen -->
+  <div id="settings-screen" class="screen" style="display: none;">
+    <div class="header">
+      <button id="settings-back-btn" class="btn-icon">←</button>
+      <h2>Settings</h2>
+    </div>
+
+    <div class="settings-content">
+      <div class="settings-section">
+        <h3>Security</h3>
+        
+        <div class="input-group">
+          <label for="auto-lock-minutes">Auto-lock after (minutes)</label>
+          <input type="number" id="auto-lock-minutes" min="0" max="120" value="15">
+          <small>Set to 0 to disable auto-lock</small>
+        </div>
+
+        <div class="input-group">
+          <label for="clipboard-clear-seconds">Clear clipboard after (seconds)</label>
+          <input type="number" id="clipboard-clear-seconds" min="0" max="300" value="30">
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="mask-keys" checked>
+            <span>Mask API keys by default</span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="enable-audit-log" checked>
+            <span>Enable audit log</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Features</h3>
+        
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="enable-auto-fill" checked>
+            <span>Enable auto-fill detection</span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="show-usage-stats" checked>
+            <span>Show usage statistics</span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="show-expiration-warnings" checked>
+            <span>Show expiration warnings</span>
+          </label>
+        </div>
+
+        <div class="input-group">
+          <label for="expiration-warning-days">Warn before expiration (days)</label>
+          <input type="number" id="expiration-warning-days" min="1" max="90" value="7">
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Appearance</h3>
+        
+        <div class="input-group">
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto (System)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Data Management</h3>
+        
+        <button id="export-vault-btn" class="btn btn-secondary btn-block">Export Vault</button>
+        <button id="import-vault-btn" class="btn btn-secondary btn-block">Import Vault</button>
+        <button id="view-audit-log-btn" class="btn btn-secondary btn-block">View Audit Log</button>
+      </div>
+
+      <div class="settings-footer">
+        <button id="save-settings-btn" class="btn btn-primary btn-block">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
+

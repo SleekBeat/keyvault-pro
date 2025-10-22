@@ -1,0 +1,61 @@
+/* KeyVault Pro Content Styles */
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+.keyvault-icon {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.keyvault-icon:hover {
+  opacity: 1;
+}
+
+.keyvault-selector-overlay * {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.keyvault-notification {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Scrollbar styling for selector */
+.keyvault-selector::-webkit-scrollbar {
+  width: 8px;
+}
+
+.keyvault-selector::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.keyvault-selector::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.keyvault-selector::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

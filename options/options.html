@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyVault Pro - Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔑 KeyVault Pro - Options</h1>
+      <p>Advanced settings and configuration</p>
+    </header>
+
+    <main>
+      <section class="section">
+        <h2>Security Settings</h2>
+        <div class="setting-item">
+          <label for="auto-lock">Auto-lock after inactivity (minutes)</label>
+          <input type="number" id="auto-lock" min="0" max="120" value="15">
+          <p class="description">Set to 0 to disable auto-lock</p>
+        </div>
+
+        <div class="setting-item">
+          <label for="clipboard-clear">Clear clipboard after (seconds)</label>
+          <input type="number" id="clipboard-clear" min="0" max="300" value="30">
+          <p class="description">Automatically clear copied API keys from clipboard</p>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="mask-keys" checked>
+            <span>Mask API keys by default</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="enable-audit" checked>
+            <span>Enable audit logging</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Feature Settings</h2>
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="enable-autofill" checked>
+            <span>Enable automatic field detection and auto-fill</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="show-stats" checked>
+            <span>Show usage statistics</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="show-warnings" checked>
+            <span>Show expiration warnings</span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label for="warning-days">Warn before expiration (days)</label>
+          <input type="number" id="warning-days" min="1" max="90" value="7">
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Appearance</h2>
+        <div class="setting-item">
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto (System)</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Data Management</h2>
+        <div class="button-group">
+          <button id="export-btn" class="btn btn-secondary">Export Vault</button>
+          <button id="import-btn" class="btn btn-secondary">Import Vault</button>
+          <button id="audit-log-btn" class="btn btn-secondary">View Audit Log</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>About</h2>
+        <p><strong>KeyVault Pro</strong> - Secure API Key Manager</p>
+        <p>Version 1.0.0</p>
+        <p>A comprehensive browser extension for managing API keys with intelligent auto-fill, security features, and usage tracking.</p>
+      </section>
+    </main>
+
+    <footer>
+      <button id="save-btn" class="btn btn-primary">Save Settings</button>
+      <div id="status" class="status"></div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
+

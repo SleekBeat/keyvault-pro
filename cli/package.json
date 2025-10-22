@@ -1,0 +1,19 @@
+{
+  "name": "keyvault-cli",
+  "version": "1.0.0",
+  "description": "Command-line interface for KeyVault Pro API key management",
+  "main": "index.js",
+  "bin": {
+    "keyvault": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["api", "keys", "cli", "security", "vault"],
+  "author": "KeyVault Pro",
+  "license": "MIT",
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
