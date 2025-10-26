@@ -1,0 +1,33 @@
+{
+  "name": "keyvault-pro",
+  "version": "1.0.0",
+  "description": "Secure API Key Management for Developers - Browser Extension, CLI Tool, and MCP Server",
+  "private": true,
+  "scripts": {
+    "install:cli": "cd cli && npm install",
+    "install:mcp": "cd mcp-server && npm install",
+    "install:all": "npm run install:cli && npm run install:mcp",
+    "start:mcp": "cd mcp-server && npm start",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "api-keys",
+    "security",
+    "browser-extension",
+    "cli",
+    "mcp",
+    "encryption",
+    "vault",
+    "password-manager"
+  ],
+  "author": "KeyVault Pro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SleekBeat/keyvault-pro.git"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
