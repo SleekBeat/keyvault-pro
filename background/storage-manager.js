@@ -166,6 +166,9 @@ export class StorageManager {
     };
 
     const data = await this.getStorageData();
+    if (!data.keys) {
+      data.keys = [];
+    }
     data.keys.push(newKey);
     await this.setStorageData(data);
     await this.updateLastActivity();
@@ -256,11 +259,15 @@ export class StorageManager {
    */
   async updateSettings(newSettings) {
     const data = await this.getStorageData();
+    if (!data.settings) {
+      data.settings = this.getDefaultSettings();
+    }
     data.settings = {
       ...data.settings,
       ...newSettings
     };
     await this.setStorageData(data);
+    return { success: true };
   }
 
   /**

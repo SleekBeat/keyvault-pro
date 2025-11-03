@@ -15,6 +15,9 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 });
 
 async function initializeExtension() {
+  // Initialize storage manager with default data structure
+  await storageManager.initialize();
+
   // Create context menu
   chrome.contextMenus.create({
     id: 'fill-api-key',
